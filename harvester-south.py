@@ -3,7 +3,7 @@
 import tweepy, json
 from tweetstore import TweetStore
 
-storage = TweetStore('test_db')
+storage = TweetStore('tweets_adelaide')
 
 ## OAuth Keys
 # Application Key
