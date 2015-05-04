@@ -1,0 +1,17 @@
+import socket
+from subprocess import call
+
+s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+s.connect(("gmail.com",80))
+ip_address = s.getsockname()[0]
+s.close()
+
+hosts = open('hosts')
+i = 0
+for line in hosts :
+	i += 1
+	if line == ip_address+"\n" and i == 1 :
+		call(['python','/Deployment/harvester-north.py'])
+	elif line == ip_address+"\n" and i == 1 :
+		call(['python','/Deployment/harvester-south.py'])
+		
