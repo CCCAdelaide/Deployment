@@ -3,14 +3,14 @@
 import tweepy, json
 from tweetstore import TweetStore
 
-storage = TweetStore('test_db')
+storage = TweetStore('tweets_adelaide')
 
 ## OAuth Keys
 # Application Key
-consumer_key = "Vuce63dPcOgS0o3sCMk0IrPTh"
-consumer_key_secret = "QMBdwW2fil4nRr815RRc32G7yTfDQvF4imjjg81cwk6vI2qvip"
+consumer_key = "pSFHu1r2xAbqtbOsVvOU5vuFP"
+consumer_key_secret = "hjMn6oCPCyBUanidBwAImXX051ILf1JVhrW4IO268qZS00IFvI"
 # Jimmy's personal twitter account key (DON'T GET ME BANNED PLEASE)
-access_token = "46279225-DvynAIpVfLIuNVZZZ6a7LXXU4u1wRuUmv5vj8PmIO"
+access_token = "19472785-vQJRKwqBNuOMs1s5AwTzv3wFWQlqtjeIflj5rNuyy"
 access_token_secret = "9FhKfoE9j4fbFCv5GD2aU6AX05mc9XAMit5wOFt3hnSPx"
 
 ## Init OAuth

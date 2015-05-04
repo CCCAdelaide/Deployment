@@ -6,12 +6,11 @@ s.connect(("gmail.com",80))
 ip_address = s.getsockname()[0]
 s.close()
 
-hosts = open('hosts')
+harvestIPs = open('harvestIPs')
 i = 0
-for line in hosts :
+for line in harvestIPs :
 	i += 1
 	if line == ip_address+"\n" and i == 1 :
 		call(['python','/Deployment/harvester-north.py'])
-	elif line == ip_address+"\n" and i == 1 :
-		call(['python','/Deployment/harvester-south.py'])
-		
+#	elif line == ip_address+"\n" and i == 2 :
+#		call(['python','/Deployment/harvester-south.py'])
