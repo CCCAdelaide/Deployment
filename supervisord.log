@@ -1,0 +1,8 @@
+2015-05-04 23:50:49,028 WARN Failed to clean up '/tmp/foo-stderr---supervisor-pbxFl7.log'
+2015-05-04 23:50:49,028 WARN Failed to clean up '/tmp/foo-stdout---supervisor-IE8UkA.log'
+2015-05-04 23:50:49,033 INFO daemonizing the supervisord process
+2015-05-04 23:50:49,034 INFO supervisord started with pid 13516
+2015-05-05 01:06:16,778 WARN Failed to clean up '/tmp/foo-stderr---supervisor-XLoRK3.log'
+2015-05-05 01:06:16,778 WARN Failed to clean up '/tmp/foo-stdout---supervisor-4jebxB.log'
+2015-05-05 01:06:16,781 INFO daemonizing the supervisord process
+2015-05-05 01:06:16,786 INFO supervisord started with pid 19185
