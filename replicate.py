@@ -11,5 +11,5 @@ s.close()
 for line in harvestIPs :
 	if line != ip_address+"\n":
 		target_ip = (line.split('\n'))[0]
-		data = '{"source": "tweets_adelaide", "target": "http://'+ip_address+':5984/tweets_adelaide", "create_target": true, "continuous": true}'
+		data = '{"source": "tweets_adelaide", "target": "http://'+target_ip+':5984/tweets_adelaide", "create_target": true, "continuous": true}'
 		call(['sudo','curl','-H','Content-Type:application/json','-X','POST','localhost:5984/_replicate','-d',data])
