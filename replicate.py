@@ -1,7 +1,7 @@
 import socket
 from subprocess import call
 
-harvestIPs = open('harvestIPs')
+harvestIPs = open('/Deployment/harvestIPs')
 
 s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 s.connect(("gmail.com",80))
