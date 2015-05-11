@@ -1,6 +1,9 @@
-[program:foo]
-command=python -u /Deployment/harvester.py
-stdout_logfile = /Deployment/t.log
+[program:harvester]
+command=python /Deployment/callHarvester.py
+stdout_logfile = /Deployment/harvester.log
+
+[program:webapp]
+command=forever /WebApp/app.js
 
 [supervisord]
 
