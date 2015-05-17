@@ -12,5 +12,6 @@ for line in harvestIPs :
 	i += 1
 	if line == ip_address+"\n" and i == 1 :
 		call(['python','/Harvest-API/tweetharvester/harvester-stream.py','north','jimmy'])
+                call(['python','/Harvest-API/tweetharvester/harvester-search.py'])
 	elif line == ip_address+"\n" and i == 2 :
 		call(['python','/Harvest-API/tweetharvester/harvester-stream.py','south','david'])
