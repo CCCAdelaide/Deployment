@@ -1,0 +1,116 @@
+---
+
+# Team 9	(Adelaide)
+# 
+# Jun Jen CHAN	(341759)
+# Daniel TEH	(558424)
+# Tou LEE	(656128)
+# David MONROY	(610346)
+# Jaime MARTINEZ	(642231)
+
+# This code is used by the NeCTAR instances to set up the Twitter Harvesting and Web Application systems.
+# Author: Jun Jen Chan
+
+- hosts: webservers
+  gather_facts: no
+  tasks:
+
+    - name: create a ext4 filesystem on volume
+      filesystem: fstype=ext4 dev=/dev/vdb
+
+    - name: create directory for volume data
+      file: path=/mnt/data state=directory
+
+    - name: mount volume
+      mount: name=/mnt/data src=/dev/vdb fstype=ext4 state=present
+
+    - name: change volume data folder ownership
+      file: path=/mnt/data owner=ubuntu recurse=yes
+
+    - name: install couchdb
+      apt: pkg=couchdb state=installed update_cache=true
+
+    - name: install additional libraries
+      apt: pkg={{ item }} state=installed
+      with_items:
+         - curl
+         - git
+         - python-tweepy
+         - python-couchdb
+         - python-setuptools
+         - python2.7-dev
+         - supervisor
+         - nodejs
+         - nodejs-legacy
+         - npm
+
+    - name: clone Deployment repository from git
+      git: repo=https://github.com/CCCAdelaide/Deployment.git dest=/Deployment
+
+    - name: clone Harvest-API repository from git
+      git: repo=https://github.com/CCCAdelaide/Harvest-API.git dest=/Harvest-API
+
+    - name: clone Adelaideview repository from git
+      git: repo=https://github.com/CCCAdelaide/Adelaideview.git dest=/Adelaideview
+
+    - name: clone WebApp repository from git
+      git: repo=https://github.com/CCCAdelaide/WebApp.git dest=/WebApp
+
+    - name: change ownership of git folders
+      file: path={{ item }} owner=ubuntu recurse=yes
+      with_items:
+         - /Deployment
+         - /Harvest-API
+         - /Adelaideview
+         - /WebApp
+
+    - name: install libraries for Adelaideview (using easy_install)
+      easy_install: name={{ item }}
+      with_items:
+         - simplejson
+         - couchapp
+
+    - name: install libraries for WebApp (using npm)
+      npm: path=/WebApp
+
+    - name: install additional libraries for WebApp (using npm)
+      npm: name=forever global=yes
+
+    - name: start couchdb
+      service: name=couchdb state=started
+
+    - name: create couchdb database folder
+      file: path=/mnt/data/couchdb state=directory
+
+    - name: change couchdb database folder ownership
+      file: path=/mnt/data/couchdb owner=couchdb recurse=yes
+
+    - name: update couchdb config file
+      shell: "{{ item }}"
+      with_items:
+         - curl -X PUT http://localhost:5984/_config/httpd/bind_address -d '"0.0.0.0"'
+         - curl -X PUT http://localhost:5984/_config/couchdb/database_dir -d '"/mnt/data/couchdb"'
+         - curl -X PUT http://localhost:5984/_config/couchdb/view_index_dir -d '"/mnt/data/couchdb"'
+         - curl -X PUT localhost:5984/_config/httpd/enable_cors -d '"true"'
+         - curl -X PUT localhost:5984/_config/cors/origins -d '"*"'
+
+    - name: create database
+      shell: curl -X PUT http://localhost:5984/tweets_adelaide
+
+    - name: copy instance IPs from local machine to remote instances
+      copy: src=harvestIPs dest=/Deployment/harvestIPs
+
+    - name: initiate replication between databases
+      shell: python /Deployment/replicate.py
+
+    - name: create views in couchDB
+      shell: couchapp push /Adelaideview/adelaideview http://localhost:5984/tweets_adelaide
+
+    - name: update supervisord.conf file
+      shell: cp /Deployment/supervisord.conf /etc/supervisor/supervisord.conf
+
+    - name: restart supervisor to run harvester and webapp
+      service: name=supervisor state=restarted
+
+    
+
