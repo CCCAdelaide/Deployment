@@ -15,7 +15,7 @@ import os
 import boto
 from boto.ec2.regioninfo import RegionInfo
 
-region = RegionInfo(name='melbourne-qh2', endpoint='nova.rc.nectar.org.au')
+region = RegionInfo(name='melbourne', endpoint='nova.rc.nectar.org.au')
 conn = boto.connect_ec2(aws_access_key_id='f0e153d37993442bb6ebcd8b2fc681e9',
 aws_secret_access_key='4c318298791a496489a661e53ceceb34', is_secure=True, region=region,
 port=8773,path='/services/Cloud',validate_certs=False)
@@ -29,7 +29,9 @@ volPlacement = 'melbourne-qh2'
 securityGroups = ['couchdb','default','http','ssh','WebApp']
 private_key_name = 'group'
 private_key_file = 'group.pem'
-time_before_running_ansible = 120	# in seconds
+
+ticks = 10	# in seconds
+time_before_running_ansible = 10	# in ticks
 
 hosts = open('hosts', 'w')    # file to write instance IPs for ansible
 harvestIPs = open('harvestIPs', 'w')    # file to write instace IPs for harvesting
@@ -105,8 +107,10 @@ print "Completed launching of "+str(instanceCount)+" instances"
 print "Total time taken: %.2f s" % (END-START)
 
 # run a timer to allow instances to complete boot up and their SSH ports to be opened before calling the Ansible playbook
-print "Waiting "+str(time_before_running_ansible)+" seconds for instances to complete launch..."
-time.sleep(time_before_running_ansible)
+for i in range(time_before_running_ansible):
+    print "Waiting "+str((time_before_running_ansible - i)*ticks)+" seconds for instances to complete launch..."
+    time.sleep(ticks)
 
 # call Ansible playbook
+print "Calling Ansible playbook"
 subprocess.call(['ansible-playbook','-s','ansible.yml'])
