@@ -28,5 +28,5 @@ for line in harvestIPs :
     # instance 1 is called 'cccadelaide1'
     # instance 2 is called 'cccadelaide2'
     if line == ip_address+"\n" and i == 1 :
-        input = 'https://www.duckdns.org/update?domains=cccadelaide'+str(i)+'&token=46423977-d07f-490b-9136-6ffe67fd736d&ip='+ip_address
+        input = '"https://www.duckdns.org/update?domains=cccadelaide'+str(i)+'&token=46423977-d07f-490b-9136-6ffe67fd736d&ip='+ip_address+'"'
         call(['curl','-k',input])
