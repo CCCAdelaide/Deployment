@@ -118,8 +118,3 @@
     - name: restart supervisor to run harvester and webapp
       service: name=supervisor state=restarted
 
-#    - name: include instance IP in Duck DNS
-#      shell: python /Deployment/createDNS.py
-
-    
-

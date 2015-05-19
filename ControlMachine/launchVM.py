@@ -20,7 +20,7 @@ conn = boto.connect_ec2(aws_access_key_id='f0e153d37993442bb6ebcd8b2fc681e9',
 aws_secret_access_key='4c318298791a496489a661e53ceceb34', is_secure=True, region=region,
 port=8773,path='/services/Cloud',validate_certs=False)
 
-instanceCount = 1   # number of instances launched
+instanceCount = 2   # number of instances launched
 instanceType = 'm2.small'    # only use m2 types as volume /dev mount from directory is hard-coded
 instanceImage = 'ami-000022b3'	# Ubuntu image
 volumeSize = 10 # volume size in Gb
