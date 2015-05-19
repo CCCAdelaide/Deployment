@@ -104,13 +104,19 @@
       shell: python /Deployment/replicate.py
 
     - name: create views in couchDB
-      shell: couchapp push /Adelaideview/adelaideview http://localhost:5984/tweets_adelaide
+      shell: "{{ item }}"
+      with_items:
+         - couchapp push /Adelaideview/adelaideview http://localhost:5984/tweets_adelaide
+         - couchapp push /Adelaideview/adelaide_sentiment http://localhost:5984/tweets_adelaide
 
     - name: update supervisord.conf file
       shell: cp /Deployment/supervisord.conf /etc/supervisor/supervisord.conf
 
     - name: restart supervisor to run harvester and webapp
       service: name=supervisor state=restarted
+
+    - name: include instance IP in Duck DNS
+      shell: python /Deployment/createDNS.py
 
     
 
