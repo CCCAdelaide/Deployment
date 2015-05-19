@@ -9,7 +9,7 @@
 # Jaime MARTINEZ	(642231)
 
 # This code is used by the NeCTAR instances to set up the Twitter Harvesting and Web Application systems.
-# Author: Jun Jen Chan
+# Author: Jun Jen Chanz
 
 - hosts: webservers
   gather_facts: no
