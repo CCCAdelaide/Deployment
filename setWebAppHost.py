@@ -29,7 +29,7 @@ s.close()
 
 for line in read :
 	if line.startswith('//changeHostHere') :
-		write.write('host = '+ip_address+' //set to local instance IP\n')
+		write.write('host = \"'+ip_address+'\" //set to local instance IP\n')
 	else :
 		write.write(line)
 
