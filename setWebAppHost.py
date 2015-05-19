@@ -6,14 +6,14 @@
 # David MONROY	(610346)
 # Jaime MARTINEZ	(642231)
 
-# This code is used by the NeCTAR instances to update their own IP in the Web Application file, 'request.js'.
+# This code is used by the NeCTAR instances to update their own IP in the Web Application file, 'requests.js'.
 # Author: Jun Jen Chan
 
 import socket
 from subprocess import call
 
-readFile = '/WebApp/public/controllers/request.js'
-writeFile = 'temp_request.js'
+readFile = '/WebApp/public/controllers/requests.js'
+writeFile = 'temp_requests.js'
 
 #readFile = 'test'
 #writeFile = 'temp'
