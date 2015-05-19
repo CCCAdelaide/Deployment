@@ -110,10 +110,10 @@
          - couchapp push /Adelaideview/adelaide_sentiment http://localhost:5984/tweets_adelaide
 
     - name: updating supervisor and WebApp files
-      shell: "{{ items }}"
+      shell: "{{ item }}"
       with_items:
          - cp /Deployment/supervisord.conf /etc/supervisor/supervisord.conf
-         - python /Deployment/setWebApp.py
+         - python /Deployment/setWebAppHost.py
 
     - name: restart supervisor to run harvester and webapp
       service: name=supervisor state=restarted

@@ -1,3 +1,2 @@
 [webservers]
-ubuntu@45.113.232.150 ansible_ssh_private_key_file=group.pem
-ubuntu@45.113.232.151 ansible_ssh_private_key_file=group.pem
+ubuntu@45.113.232.154 ansible_ssh_private_key_file=group.pem

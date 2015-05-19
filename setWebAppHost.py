@@ -12,11 +12,11 @@
 import socket
 from subprocess import call
 
-#readFile = '/WebApp/public/controllers/request.js'
-#writeFile = 'temp_request.js'
+readFile = '/WebApp/public/controllers/request.js'
+writeFile = 'temp_request.js'
 
-readFile = 'test'
-writeFile = 'temp'
+#readFile = 'test'
+#writeFile = 'temp'
 
 read = open(readFile)
 write = open(writeFile,'w')
