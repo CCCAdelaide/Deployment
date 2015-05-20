@@ -108,6 +108,7 @@
       with_items:
          - couchapp push /Adelaideview/adelaideview http://localhost:5984/tweets_adelaide
          - couchapp push /Adelaideview/adelaide_sentiment http://localhost:5984/tweets_adelaide
+         - couchapp push /Adelaideview/ade_view01 http://localhost:5984/tweets_adelaide
 
     - name: updating supervisor and WebApp files
       shell: "{{ item }}"
