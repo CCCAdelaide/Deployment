@@ -28,7 +28,7 @@ for line in harvestIPs :
     # instance 1 calls the North Adelaide harvester and the Search API harvester
     if line == ip_address+"\n" and i == 1 :
         call(['python','/Harvest-API/tweetharvester/harvester-stream.py','north','jimmy'])
-                call(['python','/Harvest-API/tweetharvester/harvester-search.py'])
+        call(['python','/Harvest-API/tweetharvester/harvester-search.py'])
     # instance 2 calls the South Adelaide harvester
     elif line == ip_address+"\n" and i == 2 :
         call(['python','/Harvest-API/tweetharvester/harvester-stream.py','south','david'])
